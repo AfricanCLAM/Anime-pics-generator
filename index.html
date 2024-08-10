@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waifu Pics Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .main-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .header, .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #819faf;
+            border-bottom: 1px solid #ccc;
+        }
+        .footer {
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .form-inline .custom-radio, .form-inline .custom-select, .form-inline button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Waifu Pics Generator</h2>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="form-inline justify-content-between">
+            <!-- Radio Buttons -->
+            <div class="custom-control custom-radio">
+                <input type="radio" id="sfwRadio" name="category" value="sfw" class="custom-control-input" onclick="updateDropdown()" checked>
+                <label class="custom-control-label" for="sfwRadio">SFW</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="nsfwRadio" name="category" value="nsfw" class="custom-control-input" onclick="updateDropdown()">
+                <label class="custom-control-label" for="nsfwRadio">NSFW</label>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <select id="type-select" class="custom-select">
+                <!-- Options populated by JavaScript -->
+            </select>
+
+            <!-- Generate Button -->
+            <button onclick="waifu()" class="btn btn-primary">Generate</button>
+        </div>
+
+        <!-- Image Container -->
+        <div id="image-container" class="image-container">
+            <!-- Image will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Waifu Pics Generator || Rafi salman</p>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function updateDropdown() {
+            const typeSelect = document.getElementById("type-select");
+            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+
+            // Clear existing options
+            typeSelect.innerHTML = "";
+
+            // Populate options based on the selected category
+            if (selectedCategory === "sfw") {
+                const sfwOptions = ["waifu", "neko", "shinobu", "megumin", "bully", "cuddle", "cry", "hug", "awoo", 
+                                    "kiss", "lick", "pat", "smug", "bonk", "yeet", "blush", "smile", "wave", 
+                                    "highfive", "handhold", "nom", "bite", "glomp", "slap", "kill", "kick", 
+                                    "happy", "wink", "poke", "dance", "cringe"];
+                sfwOptions.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.text = option.charAt(0).toUpperCase() + option.slice(1);
+                    typeSelect.add(opt);
+                });
+            } else if (selectedCategory === "nsfw") {
+                const nsfwOptions = ["waifu", "neko", "trap", "bjob"];
+                nsfwOptions.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.text = option.charAt(0).toUpperCase() + option.slice(1);
+                    typeSelect.add(opt);
+                });
+            }
+        }
+
+        async function waifu() {
+            try {
+                // Get the selected category and type
+                const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+                const selectedType = document.getElementById("type-select").value;
+
+                // Construct the URL based on the selected category and type
+                const response = await fetch(`https://api.waifu.pics/${selectedCategory}/${selectedType}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                
+                const data = await response.json();
+                
+                // Get the image container
+                const imageContainer = document.getElementById("image-container");
+                
+                // Create an image element
+                const img = document.createElement("img");
+                img.src = data.url;
+                img.alt = "Waifu Image";
+                
+                // Style the image
+                img.style.width = "100%";
+                img.style.borderRadius = "10px";
+                
+                // Clear the previous image (if any)
+                imageContainer.innerHTML = "";
+                
+                // Append the new image to the container
+                imageContainer.appendChild(img);
+            } catch (error) {
+                console.error("Error fetching the image:", error);
+            }
+        }
+
+        // Initial population of the dropdown
+        updateDropdown();
+    </script>
+
+</body>
+</html>
