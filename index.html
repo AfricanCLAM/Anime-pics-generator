@@ -10,10 +10,24 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h2>Waifu Pics Generator</h2>
-    </div>
+    <!-- Header with Burger Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Waifu Pics Generator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 
     <!-- Main Container -->
     <div class="main-container">
@@ -41,6 +55,9 @@
         <div id="image-container" class="image-container">
             <!-- Image will be displayed here -->
         </div>
+        
+        <!-- Download Button -->
+        <button id="download-btn" class="btn btn-success mt-3" style="display: none;" onclick="downloadImage()">SAVE</button>
     </div>
 
     <!-- Footer -->
