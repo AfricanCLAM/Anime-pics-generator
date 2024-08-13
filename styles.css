@@ -1,28 +1,36 @@
-        .main-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .image-container {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .header, .footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #819faf;
-            border-bottom: 1px solid #ccc;
-        }
-        .footer {
-            border-top: 1px solid #ccc;
-            margin-top: 20px;
-        }
-        .form-inline .custom-radio, .form-inline .custom-select, .form-inline button {
-            margin-right: 10px;
-        }
+.main-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.image-container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+.header,
+.footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #819faf;
+  border-bottom: 1px solid #ccc;
+}
+.footer {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+}
+.form-inline .custom-radio,
+.form-inline .custom-select,
+.form-inline button {
+  margin-right: 10px;
+}
+
+.spacer{
+    margin-top: 30%;
+    flex-grow: 1;
+}
