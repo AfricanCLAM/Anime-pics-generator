@@ -1,0 +1,17 @@
+{
+  "name": "anime-pics-generator",
+  "version": "1.0.0",
+  "description": "Waifu Pics Generator is a simple web application that allows users to generate random images of their favorite waifu characters. The app provides both SFW (Safe For Work) and NSFW (Not Safe For Work) content options, and users can select different types of images from a dropdown menu.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^5.4.2"
+  }
+}

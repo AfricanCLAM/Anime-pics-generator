@@ -6,7 +6,7 @@
     <title>Waifu Pics Generator</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
 
@@ -59,8 +59,17 @@
         <!-- Download Button -->
         <button id="saveImg" class="btn btn-success mt-3" style="display: none;" onclick="downloadImage()">SAVE</button>
     </div>
+    
+    <div id="manual">
+        <h3>How to use?</h3> 
+        <ul id="manualStep">
+            <li>Select your desired category (sfw or nsfw)</li>
+            <li>select the available tag</li>
+            <li>click the "generate" Button</li>
+            <li>click the "generate" Button again to generate another picture (the previous picture will be replaced)</li>
+        </ul>
+    </div>
 
-    <div class="spacer"></div>
 
     <!-- Footer -->
     <div class="footer">
@@ -72,6 +81,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="script.js"></script>
+    <script src="/src/script.js"></script>
 </body>
 </html>

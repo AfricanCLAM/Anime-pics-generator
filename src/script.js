@@ -86,54 +86,68 @@ async function waifu() {
     // Create an image element
     const img = document.createElement("img");
     img.src = data.url;
-    img.alt = "Waifu Image";
+    img.alt = `'waifupics category: ',${selectedCategory},' type: ', ${selectedType}`;
     img.id = "waifu-img";
     // disableSpacer();
 
-    
+
     // Style the image
     img.style.width = "100%";
     img.style.borderRadius = "10px";
-    
+
     // Clear the previous image (if any)
     imageContainer.innerHTML = "";
-    
+
     // Append the new image to the container
     imageContainer.appendChild(img);
-    
+
     // Store the image URL in session storage
     sessionStorage.setItem('imageURL', data.url);
 
     // Show the download button
     document.getElementById("saveImg").style.display = "inline-block";
+
+    console.log("image src value: ", img.src, " image alt value: ", img.alt);
+    //save 
+    imageTitle = img.alt;
+    imageLink = img.src;
+    setupSaveImageButton(imageTitle, imageLink);
   } catch (error) {
     console.error("Error fetching the image:", error);
   }
 }
 
 // Function to download the image
-function downloadImage() {
-  const imageURL = sessionStorage.getItem('imageURL');
-  if (imageURL) {
-    const link = document.createElement("a");
-    link.href = imageURL;
+async function downloadImage(imageTitle, imageLink) {
+  try {
+    const response = await fetch(imageLink);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
 
-    // Optionally, extract the filename from the URL
-    // const fileName = imageURL.substring(imageURL.lastIndexOf('/') + 1);
-    // link.download = fileName;
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = imageTitle.split("/").pop() || "download"; // Name of the downloaded file
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-    link.click();
-  } else {
-    console.error("No image URL found in session storage.");
+    console.log("Image is downloaded");
+  } catch (error) {
+    console.error("Error downloading the image:", error);
   }
 }
 
 
+
 // Function to handle the saveImg button click
-function setupSaveImageButton() {
+function setupSaveImageButton(imageTitle, imageLink) {
   const saveImgButton = document.getElementById("saveImg");
-  saveImgButton.addEventListener("click", downloadImage);
+  saveImgButton.addEventListener("click", function () {
+    downloadImage(imageTitle, imageLink);
+  });
 }
+
 
 
 function disableSpacer() {
